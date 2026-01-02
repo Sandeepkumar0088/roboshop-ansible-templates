@@ -1,0 +1,19 @@
+- name: import nodejs role
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: nodejs
+
+- name: copy catalogue file
+  ansible.builtin.copy:
+    src: catalogue.service
+    dest: /etc/systemd/system/catalogue.service
+
+- name: restart catalogue
+  ansible.builtin.systemd_service:
+    state: restarted
+    name: catalogue
+    enabled: true
+    daemon_reload: true
+
+- name: load master data
+  ansible.builtin.shell: mongosh --host mongodb-{{ env }}.sandeepkumar0088.online </app/db/master-data.js
