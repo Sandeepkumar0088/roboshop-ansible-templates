@@ -2,20 +2,18 @@
   ansible.builtin.dnf:
     name: golang
     state: present
+
 - name: load app_pre_reqs
-  ansible.builtin.import_tasks: app_pre_reqs.yml
-- name: download nd extract the file
-  ansible.builtin.unarchive:
-    src: https://roboshop-artifacts.s3.amazonaws.com/dispatch-v3.zip
-    dest: /app
-    remote_src: yes
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app_pre_reqs.yml
+
 - name: init, get, build
   ansible.builtin.shell: go mod init dispatch ; go get ; go build
   args:
     chdir: /app
-- name: enable nd restart
-  ansible.builtin.systemd_service:
-    state: restarted
-    name: dispatch
-    enabled: true
-    daemon_reload: true
+
+- name: load app_pre_reqs
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: systemd.yml

@@ -4,12 +4,12 @@
     state: present
 
 - name: remove html directory
-  ansible.builtin.template:
+  ansible.builtin.file:
     path: /usr/share/nginx/html
     state: absent
 
 - name: add html directory
-  ansible.builtin.template:
+  ansible.builtin.file:
     path: /usr/share/nginx/html
     state: directory
 
@@ -20,7 +20,7 @@
     remote_src: yes
 
 - name: copy nginx configuration file
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
 
