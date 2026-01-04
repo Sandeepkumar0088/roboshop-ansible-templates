@@ -7,12 +7,16 @@
     state: present
 
 - name: load app_pre_reqs
-  ansible.builtin.import_tasks: app_pre_reqs.yml
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app_pre_reqs.yml
 
 - name: Install specified python requirements
   ansible.builtin.pip:
     requirements: /app/requirements.txt
     executable: pip3
 
-- name: import systemd tasks
-  ansible.builtin.import_tasks: systemd.yml
+- name: load app_pre_reqs
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: systemd.yml
