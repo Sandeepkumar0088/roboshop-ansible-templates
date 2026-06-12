@@ -13,4 +13,4 @@
 
 
 - name: load master data
-  ansible.builtin.shell: mongosh --host 172.31.35.252 </app/db/master-data.js
+  ansible.builtin.shell: mongosh --host mongodb-dev.sandeepkumar0088.online </app/db/master-data.js
