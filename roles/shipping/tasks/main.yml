@@ -8,11 +8,47 @@
     name: mysql
     state: present
 
+#- name: Load schema
+#  ansible.builtin.shell: mysql -h mysql-dev.sandeepkumar5427.online -uroot -pRoboShop@1 < /app/db/schema.sql
+
+#- name: Allow root remote access
+#  ansible.builtin.shell: |
+#    mysql -uroot -p'RoboShop@1' -e "CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY 'RoboShop@1'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';"
+
+#- name: Load user
+#  ansible.builtin.shell: mysql -h mysql-dev.sandeepkumar5427.online -uroot -pRoboShop@1 < /app/db/app-user.sql
+#
+#- name: Load master data
+#  ansible.builtin.shell: mysql -h mysql-dev.sandeepkumar5427.online -uroot -pRoboShop@1 < /app/db/master-data.sql
+
 - name: Load schema
-  ansible.builtin.shell: mysql -h mysql-dev.sandeepkumar5427.online -uroot -pRoboShop@1 < /app/db/schema.sql
+  vars:
+    set_pass_schema : !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      63396535376461323966376566323537393336396631396233383463356363323966666430363833
+      3732316137626231306266346238343136303634373363370a393930663930326266356262326135
+      36346264653534306661633730666463316163366635326165396330613637623539323666326635
+      3339663961623362640a656134356434303237656161316535653133333532376465393432373930
+      3664[root@work learn-ansible]#
+
+  ansible.builtin.shell: mysql -h mysql-dev.sandeepkumar0088.online -uroot -p'{{ set_pass_schema }}' < /app/db/schema.sql
 
 - name: Load user
-  ansible.builtin.shell: mysql -h mysql-dev.sandeepkumar5427.online -uroot -pRoboShop@1 < /app/db/app-user.sql
+  set_pass_app_user: !vault |
+    $ANSIBLE_VAULT;1.1;AES256
+    63396535376461323966376566323537393336396631396233383463356363323966666430363833
+    3732316137626231306266346238343136303634373363370a393930663930326266356262326135
+    36346264653534306661633730666463316163366635326165396330613637623539323666326635
+    3339663961623362640a656134356434303237656161316535653133333532376465393432373930
+    3664[root@work learn-ansible]#
+  ansible.builtin.shell: mysql -h mysql-dev.sandeepkumar0088.online -uroot -p'{{ set_pass_app_user }}' < /app/db/app-user.sql
 
 - name: Load master data
-  ansible.builtin.shell: mysql -h mysql-dev.sandeepkumar5427.online -uroot -pRoboShop@1 < /app/db/master-data.sql
+  set_pass_master_data: !vault |
+    $ANSIBLE_VAULT;1.1;AES256
+    63396535376461323966376566323537393336396631396233383463356363323966666430363833
+    3732316137626231306266346238343136303634373363370a393930663930326266356262326135
+    36346264653534306661633730666463316163366635326165396330613637623539323666326635
+    3339663961623362640a656134356434303237656161316535653133333532376465393432373930
+    3664[root@work learn-ansible]#
+  ansible.builtin.shell: mysql -h mysql-dev.sandeepkumar0088.online -uroot -p'{{ set_pass_master_data }}' < /app/db/master-data.sql
