@@ -31,7 +31,7 @@
       3339663961623362640a656134356434303237656161316535653133333532376465393432373930
       3664[root@work learn-ansible]#
 
-  ansible.builtin.shell: mysql -h mysql-dev.sandeepkumar0088.online -uroot -p'{{ set_pass_schema }}' < /app/db/schema.sql
+  ansible.builtin.shell: mysql -h mysql-dev.sandeepkumar5427.online -uroot -p'{{ set_pass_schema }}' < /app/db/schema.sql
 
 - name: Load user
   set_pass_app_user: !vault |
@@ -41,7 +41,7 @@
     36346264653534306661633730666463316163366635326165396330613637623539323666326635
     3339663961623362640a656134356434303237656161316535653133333532376465393432373930
     3664[root@work learn-ansible]#
-  ansible.builtin.shell: mysql -h mysql-dev.sandeepkumar0088.online -uroot -p'{{ set_pass_app_user }}' < /app/db/app-user.sql
+  ansible.builtin.shell: mysql -h mysql-dev.sandeepkumar5427.online -uroot -p'{{ set_pass_app_user }}' < /app/db/app-user.sql
 
 - name: Load master data
   set_pass_master_data: !vault |
@@ -51,4 +51,4 @@
     36346264653534306661633730666463316163366635326165396330613637623539323666326635
     3339663961623362640a656134356434303237656161316535653133333532376465393432373930
     3664[root@work learn-ansible]#
-  ansible.builtin.shell: mysql -h mysql-dev.sandeepkumar0088.online -uroot -p'{{ set_pass_master_data }}' < /app/db/master-data.sql
+  ansible.builtin.shell: mysql -h mysql-dev.sandeepkumar5427.online -uroot -p'{{ set_pass_master_data }}' < /app/db/master-data.sql
