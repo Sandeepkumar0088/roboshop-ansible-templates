@@ -1,10 +1,8 @@
 - name: install nodejs:20
   ansible.builtin.dnf:
-    name: '@nodejs:20'
-    state: present
-- name: install unzip
-  ansible.builtin.dnf:
-    name: unzip
+    name:
+    - '@nodejs:20'
+    - npm
     state: present
 
 - name: load app_pre_reqs
