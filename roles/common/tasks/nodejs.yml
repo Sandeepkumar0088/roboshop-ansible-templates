@@ -1,8 +1,8 @@
 - name: install nodejs:20
   ansible.builtin.dnf:
     name:
-    - '@nodejs:20'
-    - npm
+      - '@nodejs:20'
+      - npm
     state: present
 
 - name: load app_pre_reqs
