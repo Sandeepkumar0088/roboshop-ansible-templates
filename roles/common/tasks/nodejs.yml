@@ -8,9 +8,15 @@
 - name: load app_pre_reqs
   ansible.builtin.import_tasks: app_pre_reqs.yml
 
+#- name: install packages
+#  community.general.npm:
+#    path: /app
 - name: install packages
-  community.general.npm:
-    path: /app
+  ansible.builtin.shell: npm install
+  args:
+    chdir: /app
+
+
 
 - name: import systemd tasks
   ansible.builtin.import_tasks: systemd.yml
