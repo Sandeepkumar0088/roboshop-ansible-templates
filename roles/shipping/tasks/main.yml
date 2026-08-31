@@ -18,7 +18,7 @@
 #  ansible.builtin.shell: mysql -h mysql-dev.sandeepkumar5427.online -uroot -pRoboShop@1 < /app/db/master-data.sql
 
 - name: Load schema
-  ansible.builtin.shell: "mysql -h mysql-dev.sandeepkumar5427.online -uroot -p'{{ password }}' < /app/db/schema.sql"
+  ansible.builtin.shell: "mysql -h mysql-dev.sandeepkumar5427.online -uroot -p{{ password }} < /app/db/schema.sql"
 
 - name: Load user
   ansible.builtin.shell: "mysql -h mysql-dev.sandeepkumar5427.online -uroot -p'{{ password }}' < /app/db/app-user.sql"
